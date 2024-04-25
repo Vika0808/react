@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('travel.jpg');
+  background-image: url('travel.jpg'); 
   background-size: cover;
   background-position: center;
 }
@@ -14,15 +14,17 @@
   background-color: rgba(255, 255, 255, 0.8); 
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Тінь */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
   max-width: 400px; 
   width: 100%; 
+  position: relative; 
 }
 
 .RegistrationForm input[type="text"],
 .RegistrationForm input[type="email"],
-.RegistrationForm input[type="password"] {
-  width: 100%;
+.RegistrationForm input[type="password"],
+.RegistrationForm input[type="date"] {
+  width: calc(100% - 22px); 
   padding: 10px;
   margin: 8px 0;
   border: 1px solid #ccc;
@@ -48,4 +50,10 @@
 
 .RegistrationForm h2 {
   margin-bottom: 20px;
+}
+
+.RememberMeCheckbox {
+  position: absolute; 
+  left: 20px; 
+  bottom: 20px; 
 }
