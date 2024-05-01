@@ -1,13 +1,24 @@
-.App {
+/* App.css */
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
   font-family: Arial, sans-serif;
-  text-align: center;
+}
+
+.App {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-image: url('travel.jpg'); 
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.content {
+  z-index: 1; /* Ensure the content appears above the overlay */
 }
 
 .RegistrationForm {
@@ -17,14 +28,17 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
   max-width: 400px; 
   width: 100%; 
-  position: relative; 
+  margin: auto; /* Центрує форму по горизонталі */
+  display: flex;
+  flex-direction: column; /* Встановлює напрямок відображення елементів у колонку */
+  align-items: center; /* Центрує елементи по горизонталі у колонці */
 }
 
 .RegistrationForm input[type="text"],
 .RegistrationForm input[type="email"],
 .RegistrationForm input[type="password"],
 .RegistrationForm input[type="date"] {
-  width: calc(100% - 22px); 
+  width: 100%; /* Розтягує поля вводу на всю ширину форми */
   padding: 10px;
   margin: 8px 0;
   border: 1px solid #ccc;
@@ -43,7 +57,6 @@
   cursor: pointer;
   font-size: 16px;
 }
-
 .RegistrationForm button:hover {
   background-color: #45a049;
 }

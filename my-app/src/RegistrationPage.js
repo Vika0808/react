@@ -1,3 +1,4 @@
+// RegistrationPage.jsx
 import React, { useState } from 'react';
 import './App.css';
 
@@ -35,7 +36,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="RegistrationForm">
+    <div className="RegistrationForm" style={{ backgroundImage: `url('travel.jpg')` }}>
       <h2>Реєстрація</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -46,6 +47,7 @@ const RegistrationPage = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
+              className="FormField"
             />
           </label>
         </div>
@@ -57,6 +59,7 @@ const RegistrationPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              className="FormField"
             />
           </label>
         </div>
@@ -68,6 +71,7 @@ const RegistrationPage = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              className="FormField"
             />
           </label>
         </div>
@@ -79,6 +83,7 @@ const RegistrationPage = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
+              className="FormField"
             />
           </label>
         </div>
@@ -90,6 +95,7 @@ const RegistrationPage = () => {
               name="dateOfBirth"
               value={formData.dateOfBirth}
               onChange={handleChange}
+              className="FormField"
             />
           </label>
         </div>
@@ -101,10 +107,11 @@ const RegistrationPage = () => {
               name="rememberMe"
               checked={formData.rememberMe}
               onChange={handleChange}
+              className="RememberMeCheckbox"
             />
           </label>
         </div>
-        <button type="submit">Зареєструватися</button>
+        <button type="submit" className="FormButton">Зареєструватися</button>
       </form>
     </div>
   );

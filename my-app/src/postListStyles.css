@@ -1,0 +1,34 @@
+/* postListStyles.css */
+.post-list-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .post-list {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .post-item {
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .comment-list {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .comment-item {
+    margin-bottom: 5px;
+  }
+  
+  .detail-link {
+    display: block;
+    text-align: right;
+  }
+
+  
