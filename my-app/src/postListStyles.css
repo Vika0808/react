@@ -1,3 +1,40 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #409b95;
+    color: #000000;
+    margin-bottom: 20px; 
+  }
+  
+  .registration-button-container {
+    margin-right: 20px;
+  }
+  
+  .registration-button {
+    background-color: #007B00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .registration-button:hover {
+    background-color: #051e05; 
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  .link {
+    margin-left: 20px;
+    text-decoration: none;
+  }
+  
 .post-list-container {
     font-family: Arial, sans-serif;
     display: flex;
@@ -38,7 +75,7 @@
     margin-bottom: 5px;
   }
   
-  .detail-button-box { /* Додали стилі для контейнера кнопки */
+  .detail-button-box { 
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -55,6 +92,6 @@
   }
   
   .detail-button:hover {
-    background-color: #007B00;
+    background-color:  #051e05;
   }
   
