@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div>
+    <div className="RegistrationForm">
       <h2>Реєстрація</h2>
       <form onSubmit={handleSubmit}>
         <div>
