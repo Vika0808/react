@@ -1,10 +1,9 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import RegistrationPage from './RegistrationPage';
 import PostListPage from './PostListPage';
 import SinglePostPage from './SinglePostPage';
-import './styles.css'; // Імпортуємо стилі
+import './styles.css'; 
 
 function App() {
   return (

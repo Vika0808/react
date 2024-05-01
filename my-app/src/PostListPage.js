@@ -1,7 +1,6 @@
-// PostListPage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './postListStyles.css'; // Імпортуємо стилі
+import './postListStyles.css'; 
 
 const initialPosts = [
   {
@@ -52,7 +51,7 @@ const generatePosts = (count) => {
     return posts;
 };
 
-const posts = initialPosts.concat(generatePosts(7)); // Замість 7 можна вказати бажану кількість додаткових постів
+const posts = initialPosts.concat(generatePosts(7)); 
 
 const PostListPage = () => {
     return (
@@ -60,19 +59,24 @@ const PostListPage = () => {
             <div className="post-list">
                 {posts.map(post => (
                     <div key={post.id} className="post-item">
-                        <h3>{post.title}</h3>
-                        {post.text && <p>{post.text}</p>}
-                        {post.comments.length > 0 && (
-                            <ul className="comment-list">
-                                {post.comments.map(comment => (
-                                    <li key={comment.commentId} className="comment-item">{comment.commentText}</li>
-                                ))}
-                            </ul>
-                        )}
-                        <Link to={`/posts/${post.id}`} className="detail-link">
-                            Детальніше
-                        </Link>
+                    <h3 className="post-title">{post.title}</h3>
+                    {post.text && <p className="post-text">{post.text}</p>}
+                    {post.comments.length > 0 && (
+                      <ul className="comment-list">
+                        {post.comments.map(comment => (
+                          <li key={comment.commentId} className="comment-item">{comment.commentText}</li>
+                        ))}
+                      </ul>
+                    )}
+                    <div className="detail-button-box"> {}
+                      <Link to={`/posts/${post.id}`}>
+                        <button className="detail-button">
+                          Детальніше
+                        </button>
+                      </Link>
                     </div>
+                  </div>
+                  
                 ))}
             </div>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 const SinglePostPage = () => {
-  const { postId } = useParams(); // Отримання параметра postId з URL
+  const { postId } = useParams(); 
 
   return (
     <div>
