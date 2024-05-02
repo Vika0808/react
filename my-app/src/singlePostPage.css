@@ -1,0 +1,57 @@
+.CentralContainer {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+  }
+  
+  .SinglePost {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    text-align: center; 
+  }
+  
+  .PostTitle {
+    margin-bottom: 10px;
+  }
+  
+  .Divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.5); 
+    margin: 20px 0;
+  }
+  
+  
+  
+  .PostContent p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify; 
+  }
+  
+  .PostActions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .LikeButton,
+  .CommentButton,
+  .EditButton {
+    padding: 10px 20px;
+    background-color: #007B00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .LikeButton:hover,
+  .CommentButton:hover,
+  .EditButton:hover {
+    background-color: #051e05;
+  }
+  
