@@ -17,7 +17,7 @@ const SinglePostPage = () => {
         <hr className="Divider" /> {}
        
           <div className="PostContent">
-            <p>
+            <p> Пост№ {postId}.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum, libero quis laoreet placerat, lectus arcu commodo nisi, vitae feugiat magna lectus a mi. Etiam hendrerit est aliquet risus gravida, at finibus orci mattis. Vestibulum et mi sed felis porta maximus. In maximus sapien eu odio accumsan pellentesque. Suspendisse ut tempor nisl, vitae volutpat sapien. Cras porta lacinia luctus. Nam vitae luctus neque, ut sollicitudin lectus. Praesent blandit sapien nec ex ornare hendrerit. Praesent consequat malesuada neque et fermentum.
 
 Suspendisse egestas scelerisque justo, vel pretium justo. Fusce felis elit, pharetra sit amet faucibus vel, dapibus eu nisi. Donec fringilla in purus a blandit. Suspendisse potenti. Fusce sit amet varius ante. Etiam gravida convallis felis, ac varius odio semper at. Duis tristique cursus viverra. Duis urna massa, lacinia et mi non, rutrum condimentum dolor. Proin feugiat risus ut orci tristique convallis. Aliquam erat volutpat. Sed ullamcorper ut ligula nec sodales.
