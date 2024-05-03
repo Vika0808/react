@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import background from './travel.jpg'; // Імпортуємо картинку
+
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="RegistrationForm" style={{ backgroundImage: `url(${background})` }}> {/* Додаємо стиль з фоном */}
+    <div className="RegistrationForm" > {}
       <h2>Реєстрація</h2>
       <form onSubmit={handleSubmit}>
         <div>
