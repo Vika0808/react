@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .LoginForm {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; 
+  }
+  
+  .LoginForm input[type="text"],
+  .LoginForm input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .LoginForm button {
+    width: calc(100% - 20px);
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .LoginForm button:hover {
+    background-color: #45a049;
+  }
+  
+  .LoginForm h2 {
+    margin-bottom: 20px;
+  }
+  
+  .RememberMeCheckbox {
+    position: relative; 
+    display: flex;
+    align-items: center;
+  }
+  
+  .RememberMeCheckbox input[type="checkbox"] {
+    margin-right: 5px; 
+  }
+  
+  .FormField {
+    margin-bottom: 15px;
+  }
+  

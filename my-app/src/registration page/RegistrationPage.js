@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './App.css';
 
 
@@ -113,6 +114,7 @@ const RegistrationPage = () => {
         </div>
         <button type="submit" className="FormButton">Зареєструватися</button>
       </form>
+      <p>Вже зареєстровані? <Link to="/login">Увійти</Link></p>
     </div>
   );
 };

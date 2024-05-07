@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PostListPage from './PostListPage';
-import SinglePostPage from './SinglePostPage';
-import RegistrationPage from './RegistrationPage'; 
+import PostListPage from './post list/PostListPage';
+import SinglePostPage from './single post/SinglePostPage';
+import RegistrationPage from './registration page/RegistrationPage'; 
+import LoginPage from './registration page/LoginPage'; 
 import './styles.css'; 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
         <Routes>
           <Route path="/posts/:postId" element={<SinglePostPage />} />
           <Route path="/posts" element={<PostListPage />} />
-          <Route path="/registration" element={<RegistrationPage />} /> {}
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} /> {}
         </Routes>
       </div>
     </Router>
