@@ -12,7 +12,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/posts/:postId" element={<SinglePostPage />} />
-          <Route path="/posts" element={<PostListPage />} />
+          <Route path="/" element={<PostListPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} /> {}
         </Routes>
