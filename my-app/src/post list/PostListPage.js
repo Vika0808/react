@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './postListStyles.css'; 
+import './postListStyles.css';
 
 const initialPosts = [
   {
@@ -37,6 +37,7 @@ const initialPosts = [
   }
 ];
 
+// Assuming generatePosts function is defined and works correctly.
 const generatePosts = (count) => {
     const posts = [];
     for (let i = 0; i < count; i++) {
@@ -51,42 +52,45 @@ const generatePosts = (count) => {
     return posts;
 };
 
-const posts = initialPosts.concat(generatePosts(7)); 
+const posts = initialPosts.concat(generatePosts(7));
 
 const PostListPage = () => {
   return (
-      <div>
-          <header className="header">
-            <h1>Пости</h1>
-            <Link to="/registration">
-              <button className="registration-button">Реєстрація/Вхід</button>
-            </Link>
-          </header>
-          <div className="post-list-container">
-              <div className="post-list">
-                  {posts.map(post => (
-                      <div key={post.id} id={post.id} className="post-item"> {}
-                          <h3 className="post-title">{post.title}</h3>
-                          {post.text && <p className="post-text">{post.text}</p>}
-                          {post.comments.length > 0 && (
-                              <ul className="comment-list">
-                                  {post.comments.map(comment => (
-                                      <li key={comment.commentId} className="comment-item">{comment.commentText}</li>
-                                  ))}
-                              </ul>
-                          )}
-                          <div className="detail-button-box">
-                              <Link to={`/posts/${post.id}`}>
-                                  <button className="detail-button">
-                                      Детальніше
-                                  </button>
-                              </Link>
-                          </div>
-                      </div>
+    <div className="page-container">
+      <header className="header">
+        <h1>Щоденник мандрівника</h1>
+        <Link to="/registration">
+          <button className="registration-button">Реєстрація/Вхід</button>
+        </Link>
+      </header>
+      <div className="post-list-container">
+      <Link to={`/posts/${post.id}`}>
+            <button className="add-post-button">+</button>
+      </Link>
+        <div className="post-list">
+          {posts.map(post => (
+            <div key={post.id} id={post.id} className="post-item">
+              <h3 className="post-title">{post.title}</h3>
+              {post.text && <p className="post-text">{post.text}</p>}
+              {post.comments.length > 0 && (
+                <ul className="comment-list">
+                  {post.comments.map(comment => (
+                    <li key={comment.commentId} className="comment-item">{comment.commentText}</li>
                   ))}
+                </ul>
+              )}
+              <div className="detail-button-box">
+                <Link to={`/posts/${post.id}`}>
+                  <button className="detail-button">
+                    Детальніше
+                  </button>
+                </Link>
               </div>
-          </div>
+            </div>
+          ))}
+        </div>
       </div>
+    </div>
   );
 };
 

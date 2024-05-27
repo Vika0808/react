@@ -1,97 +1,137 @@
+/* Бекграунд для всієї сторінки */
+.page-container {
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Стилі для заголовка та кнопки реєстрації */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #409b95;
-    color: #000000;
-    margin-bottom: 20px; 
-  }
-  
-  .registration-button-container {
-    margin-right: 20px;
-  }
-  
-  .registration-button {
-    background-color: #007B00;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
-  }
-  
-  .registration-button:hover {
-    background-color: #051e05; 
-  }
-  
-  .header h1 {
-    margin: 0;
-  }
-  
-  .link {
-    margin-left: 20px;
-    text-decoration: none;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #2d6a4f;
+  color: #ffffff;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.registration-button {
+  background-color: #1b4332;
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.registration-button:hover {
+  background-color: #081c15;
+  transform: scale(1.05);
+}
+
+/* Стилі для контейнера з постами */
 .post-list-container {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .post-list {
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .post-item {
-    margin-bottom: 30px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    position: relative;
-  }
-  
-  .post-title {
-    margin: 0;
-    margin-bottom: 10px;
-  }
-  
-  .post-text {
-    margin: 0;
-    margin-bottom: 10px;
-  }
-  
-  .comment-list {
-    padding: 0;
-    list-style: none;
-  }
-  
-  .comment-item {
-    margin-bottom: 5px;
-  }
-  
-  .detail-button-box { 
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-  }
-  
-  .detail-button {
-    background-color: green;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .detail-button:hover {
-    background-color:  #051e05;
-  }
-  
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.post-list {
+  width: 100%;
+  max-width: 800px;
+}
+
+.post-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.post-title {
+  margin: 0;
+  margin-bottom: 10px;
+  color: #1b4332;
+}
+
+.post-text {
+  margin: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.comment-list {
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.comment-item {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Стилі для кнопки "Детальніше" */
+.detail-button-box {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.detail-button {
+  background-color: #2d6a4f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.detail-button:hover {
+  background-color: #081c15;
+}
+
+/* Стилі для кнопки "Додати пост" */
+.add-post-button {
+  background-color: #2d6a4f;
+  color: #fff;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 20px; /* Adjust this value to set the distance from the bottom */
+  right: 20px;
+  z-index: 999; /* Ensure the button appears above other content */
+}
+
+.add-post-button:hover {
+  background-color: #081c15;
+  transform: scale(1.1);
+}

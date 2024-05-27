@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
+import { baseURL } from '../constants';
 
 
 const RegistrationPage = () => {
@@ -22,17 +23,29 @@ const RegistrationPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const {confirmPassword, ...values} = formData
     
     console.log(formData);
+    const result = await fetch(`${baseURL}/auth/register`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values)
+    }
+  
+    )
+    const data = await result.json()
+    console.log(data);
+
     setFormData({
       username: '',
       email: '',
       password: '',
-      confirmPassword: '',
-      dateOfBirth: '',
-      rememberMe: false
+      date: '',
     });
   };
 
@@ -112,7 +125,7 @@ const RegistrationPage = () => {
             />
           </label>
         </div>
-        <button type="submit" className="FormButton">Зареєструватися</button>
+        <button type="submit" disabled={formData.password !== formData.confirmPassword} className="FormButton">Зареєструватися</button>
       </form>
       <p>Вже зареєстровані? <Link to="/login">Увійти</Link></p>
     </div>
