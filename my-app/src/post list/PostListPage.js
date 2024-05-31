@@ -1,60 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './postListStyles.css';
-
-const initialPosts = [
-  {
-    id: "1",
-    title: "Title111",
-    text: "bla bla bla",
-    comments: [
-      {
-        commentId: "111",
-        commentText: "bla bla bla"
-      }
-    ]
-  },
-  {
-    id: "2",
-    title: "Title111",
-    text: "bla bla bla",
-    comments: [
-      {
-        commentId: "11111",
-        commentText: "bla bla bla22"
-      },
-      {
-        commentId: "12211",
-        commentText: "bla bla bla333"
-      },
-    ]
-  },
-  {
-    id: "3",
-    title: "Title111",
-    text: "bla bla blahdfgh",
-    comments: []
-  }
-];
-
-// Assuming generatePosts function is defined and works correctly.
-const generatePosts = (count) => {
-    const posts = [];
-    for (let i = 0; i < count; i++) {
-        const post = {
-            id: Math.random().toString(36).substr(2, 9),
-            title: "Generated Title",
-            text: "Generated Text",
-            comments: []
-        };
-        posts.push(post);
-    }
-    return posts;
-};
-
-const posts = initialPosts.concat(generatePosts(7));
+import axios from 'axios';
+import { baseURL } from '../constants';
 
 const PostListPage = () => {
+  const [posts,setPosts] = useState([]);
+  const getPosts = async () =>  {
+    const res = await axios.get(`${baseURL}/posts`)
+    
+    setPosts(res.data)
+ }
+
+useEffect(
+   () =>  {
+      getPosts()
+    }
+    , [])
+    console.log(posts)
   return (
     <div className="page-container">
       <header className="header">
@@ -64,11 +27,12 @@ const PostListPage = () => {
         </Link>
       </header>
       <div className="post-list-container">
-      <Link to={`/posts/${post.id}`}>
-            <button className="add-post-button">+</button>
+      <Link to={`/posts/new`}>
+                  <button className="add-post-button">+</button>
+                  
       </Link>
         <div className="post-list">
-          {posts.map(post => (
+          {posts && Array.isArray(posts) && posts.map(post => (
             <div key={post.id} id={post.id} className="post-item">
               <h3 className="post-title">{post.title}</h3>
               {post.text && <p className="post-text">{post.text}</p>}
@@ -81,6 +45,7 @@ const PostListPage = () => {
               )}
               <div className="detail-button-box">
                 <Link to={`/posts/${post.id}`}>
+                  <button className="add-post-button">+</button>
                   <button className="detail-button">
                     Детальніше
                   </button>
