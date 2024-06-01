@@ -6,7 +6,7 @@ import { baseURL } from '../constants';
 const SinglePostPage = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const [post, setPost] = useState({ title: '', content: '' });
+  const [post, setPost] = useState({ title: '', content: '', comments: [] });
   const [likes, setLikes] = useState(0);
   const [isEditing, setIsEditing] = useState(!postId || postId === 'new');
 
@@ -17,10 +17,20 @@ const SinglePostPage = () => {
         .then(data => {
           setPost(data);
           setLikes(data.likes || 0);
+          fetchComments(postId); 
         })
         .catch(error => console.error('Error fetching post:', error));
     }
   }, [postId]);
+
+  const fetchComments = (postId) => {
+    fetch(`${baseURL}/comments/post/${postId}`)
+      .then(response => response.json())
+      .then(data => {
+        setPost(prevPost => ({ ...prevPost, comments: data }));
+      })
+      .catch(error => console.error('Error fetching comments:', error));
+  };
 
   const handleLike = () => {
     setLikes(likes + 1);
@@ -103,9 +113,18 @@ const SinglePostPage = () => {
             <hr className="Divider" />
             <div className="PostActions">
               <button className="LikeButton" onClick={handleLike}>Лайки ({likes})</button>
-              <button className="CommentButton">Коментарі</button>
               <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
             </div>
+            {post.comments && Array.isArray(post.comments) && post.comments.length > 0 && (
+    <div className="CommentsContainer">
+    <h3>Коментарі:</h3>
+    <ul className="CommentsList">
+      {post.comments.map((comment, index) => (
+        <li key={index} className="CommentItem">{comment.content}</li>
+      ))}
+    </ul>
+  </div>
+)}
           </>
         )}
       </div>
