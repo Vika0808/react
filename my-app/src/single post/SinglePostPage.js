@@ -6,7 +6,7 @@ import { baseURL } from '../constants';
 const SinglePostPage = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const [post, setPost] = useState({ title: '', content: '', comments: [] });
+  const  [ post ,  setPost ]  =  useState ( {  title : '' ,  content : ''  } ) ;
   const [likes, setLikes] = useState(0);
   const [isEditing, setIsEditing] = useState(!postId || postId === 'new');
 
@@ -113,6 +113,7 @@ const SinglePostPage = () => {
             <hr className="Divider" />
             <div className="PostActions">
               <button className="LikeButton" onClick={handleLike}>Лайки ({likes})</button>
+              < button  className = "CommentButton" > Коментарі </button>
               <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
             </div>
             {post.comments && Array.isArray(post.comments) && post.comments.length > 0 && (

@@ -1,11 +1,11 @@
-/* Бекграунд для всієї сторінки */
+
 .page-container {
   background: linear-gradient(to right, #ece9e6, #ffffff);
   padding: 20px;
   min-height: 100vh;
 }
 
-/* Стилі для заголовка та кнопки реєстрації */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -41,7 +41,7 @@
   transform: scale(1.05);
 }
 
-/* Стилі для контейнера з постами */
+
 .post-list-container {
   font-family: Arial, sans-serif;
   display: flex;
@@ -90,7 +90,7 @@
   color: #555;
 }
 
-/* Стилі для кнопки "Детальніше" */
+
 .detail-button-box {
   position: absolute;
   right: 10px;
@@ -112,7 +112,7 @@
   background-color: #081c15;
 }
 
-/* Стилі для кнопки "Додати пост" */
+
 .add-post-button {
   background-color: #2d6a4f;
   color: #fff;
@@ -126,9 +126,9 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   position: fixed;
-  bottom: 20px; /* Adjust this value to set the distance from the bottom */
+  bottom: 20px; 
   right: 20px;
-  z-index: 999; /* Ensure the button appears above other content */
+  z-index: 999; 
 }
 
 .add-post-button:hover {
@@ -145,4 +145,99 @@
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-container select {
+  margin-right: 10px;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.filter-container input[type="text"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.filter-container select,
+.filter-container input[type="text"] {
+  font-size: 1rem;
+}
+
+.filter-container button {
+  background-color: #2d6a4f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.filter-container button:hover {
+  background-color: #081c15;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.dropdown-content p,
+.dropdown-content button {
+  color: #333;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+.dropbtn {
+  background-color: #2d6a4f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dropbtn:hover {
+  background-color: #081c15;
 }
