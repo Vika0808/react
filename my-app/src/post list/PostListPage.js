@@ -76,7 +76,7 @@ const PostListPage = () => {
             <div className="dropdown">
               <button className="dropbtn">{user.username}</button>
               <div className="dropdown-content">
-                <p>ID: {user.id}</p>
+                <p>ID: {user.user_id}</p>
                 <button onClick={handleLogout}>Вийти</button>
               </div>
             </div>
@@ -119,7 +119,7 @@ const PostListPage = () => {
                 </ul>
               )}
               <div className="detail-button-box">
-                <Link to={`/posts/${post.id}`}>
+                <Link to={`/posts/${post.post_id}`}>
                   <button className="detail-button">Детальніше</button>
                 </Link>
               </div>

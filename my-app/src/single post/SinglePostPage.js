@@ -46,7 +46,8 @@ const SinglePostPage = () => {
         const response = await fetch(`${baseURL}/posts/${postId}`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json', 
+            ...(localStorage.token ? {authorization:"Bearer "+ localStorage.token} :  {})
           },
           body: JSON.stringify(post)
         });
@@ -63,13 +64,14 @@ const SinglePostPage = () => {
         const response = await fetch(`${baseURL}/posts`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            ...(localStorage.token ? {authorization:"Bearer "+ localStorage.token} :  {})
           },
           body: JSON.stringify(post)
         });
         if (response.ok) {
           const data = await response.json();
-          navigate(`/posts/${data.id}`);
+          navigate(`/posts/${data.post_id}`);
         } else {
           alert('Failed to create post.');
         }
