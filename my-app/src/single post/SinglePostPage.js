@@ -11,24 +11,20 @@ const SinglePostPage = () => {
   const [post, setPost] = useState({ title: '', content: '', user: {} });
   const [likes, setLikes] = useState(0);
   const [isEditing, setIsEditing] = useState(!postId || postId === 'new');
-  const [subscriptionStatus, setSubscriptionStatus] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showComments, setShowComments] = useState(false);
 
-  const currentUserId = localStorage.getItem('user_id'); // Assuming user_id is stored in local storage
-
   useEffect(() => {
-    console.log('currentUserId:', currentUserId); // Діагностика
     if (postId && postId !== 'new') {
       fetch(`${baseURL}/posts/${postId}`)
         .then(response => response.json())
         .then(data => {
-          console.log('Post data:', data); // Діагностика
           setPost(data);
           setLikes(data.likes || 0);
           fetchComments(postId);
+          checkSubscription(data.user.user_id); // Перевірка підписки
         })
         .catch(error => console.error('Error fetching post:', error));
     }
@@ -41,6 +37,24 @@ const SinglePostPage = () => {
         setComments(data);
       })
       .catch(error => console.error('Error fetching comments:', error));
+  };
+
+  const checkSubscription = (userId) => {
+    fetch(`${baseURL}/subscriptions/check`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+      },
+      body: JSON.stringify({ user_id: userId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.isSubscribed) {
+          setIsSubscribed(true);
+        }
+      })
+      .catch(error => console.error('Error checking subscription:', error));
   };
 
   const handleLike = () => {
@@ -60,7 +74,7 @@ const SinglePostPage = () => {
       content: post.content,
       // Інші поля, які можуть бути необхідні для оновлення
     };
-    
+
     if (postId && postId !== 'new') {
       try {
         const response = await fetch(`${baseURL}/posts/${postId}`, {
@@ -112,14 +126,13 @@ const SinglePostPage = () => {
         body: JSON.stringify({ topic: post.title, user_id: post.user.user_id })
       }).then(response => {
         if (response.ok) {
-          setSubscriptionStatus('Підписка успішна');
           setIsSubscribed(true);
         } else {
-          setSubscriptionStatus('Помилка при підписці');
+          alert('Помилка при підписці');
         }
       }).catch(error => console.error('Error subscribing:', error));
     } else {
-      setSubscriptionStatus('Ви вже підписані на цей пост');
+      alert('Ви вже підписані на цей пост');
     }
   };
 
@@ -154,7 +167,7 @@ const SinglePostPage = () => {
       <div className="CentralContainer">
         <div className="SinglePost">
           {isEditing ? (
-            <form onSubmit={handleSave}>
+            <form className="EditPostForm" onSubmit={handleSave}>
               <div>
                 <label htmlFor="title">Заголовок посту:</label>
                 <input
@@ -178,8 +191,9 @@ const SinglePostPage = () => {
             <>
               <div className="PostUser">
                 <span>Автор: {post.user.username}</span>
-                <button className="SubscribeButton" onClick={handleSubscribe}>Підписатись</button>
-                {subscriptionStatus && <p>{subscriptionStatus}</p>}
+                <button className="SubscribeButton" onClick={handleSubscribe}>
+                  {isSubscribed ? 'Ви підписані' : 'Підписатись'}
+                </button>
               </div>
               <h2 className="PostTitle">{post.title}</h2>
               <hr className="Divider" />
@@ -190,9 +204,7 @@ const SinglePostPage = () => {
               <div className="PostActions">
                 <button className="LikeButton" onClick={handleLike}>Лайки ({likes})</button>
                 <button className="CommentButton" onClick={() => setShowComments(!showComments)}>Коментарі</button>
-                {currentUserId === String(post.user.user_id) && (
-                  <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
-                )}
+                <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
               </div>
               {showComments && (
                 <div className="CommentsContainer">
@@ -226,3 +238,4 @@ const SinglePostPage = () => {
 };
 
 export default SinglePostPage;
+
