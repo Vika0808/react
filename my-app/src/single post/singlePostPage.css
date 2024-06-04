@@ -1,57 +1,165 @@
 .CentralContainer {
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-  }
-  
-  .SinglePost {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
-    text-align: center; 
-  }
-  
-  .PostTitle {
-    margin-bottom: 10px;
-  }
-  
-  .Divider {
-    border-top: 1px solid rgba(0, 0, 0, 0.5); 
-    margin: 20px 0;
-  }
-  
-  
-  
-  .PostContent p {
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: justify; 
-  }
-  
-  .PostActions {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .LikeButton,
-  .CommentButton,
-  .EditButton {
-    padding: 10px 20px;
-    background-color: #007B00;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .LikeButton:hover,
-  .CommentButton:hover,
-  .EditButton:hover {
-    background-color: #051e05;
-  }
-  
+  position: relative;
+  padding-top: 50px; /* Відступ зверху */
+}
+
+.page-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure the image is behind the content */
+  overflow: hidden;
+}
+
+.page-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire div */
+}
+
+
+.SinglePost {
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 40px 20px; /* Збільшений внутрішній відступ зверху */
+  margin: 20px auto;
+  max-width: 800px; /* Максимальна ширина блоку */
+  text-align: center;
+}
+
+/* Додайте в цей рядок відстань від верхнього краю екрану */
+.SinglePost::before {
+  content: '';
+  position: absolute;
+  top: -50px; /* Відстань від верхнього краю екрану */
+  left: 0;
+  width: 100%;
+  height: 50px; /* Висота відступу */
+  background-color: transparent; /* Колір фону відступу */
+}
+
+
+.PostTitle {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.Divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  margin: 20px 0;
+}
+
+.PostUser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.SubscribeButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.SubscribeButton:hover {
+  background-color: #0056b3;
+}
+
+.PostContent p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: justify;
+  color: #444;
+}
+
+.PostActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.LikeButton,
+.CommentButton,
+.EditButton {
+  padding: 10px 20px;
+  background-color: #007B00;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.LikeButton:hover,
+.CommentButton:hover,
+.EditButton:hover {
+  background-color: #051e05;
+}
+
+.CommentsContainer {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.CommentsContainer h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #781a1a;
+}
+
+.CommentForm {
+  margin-bottom: 20px;
+}
+
+.CommentForm textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  font-size: 1rem;
+  color: #174111;
+}
+
+.CommentForm button {
+  padding: 8px 16px;
+  background-color: #007B00;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.CommentForm button:hover {
+  background-color: #051e05;
+}
+
+.AddCommentButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.AddCommentIcon {
+  width: 20px;
+  height: 20px;
+}

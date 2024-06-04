@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './loginPage.css'; 
 import { baseURL } from '../constants';
+import travel from '../travel.jpg';
+
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -54,6 +56,10 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+    <div className="page-image">
+      <img src={travel} alt="Background" />
+    </div>
     <div className="LoginForm">
       <h2>Вхід</h2>
       {error && <p className="error">{error}</p>}
@@ -97,6 +103,7 @@ const LoginPage = () => {
         <button type="submit" className="FormButton">Увійти</button>
       </form>
     </div>
+    </>
   );
 };
 
