@@ -17,11 +17,15 @@ const SinglePostPage = () => {
   const [newComment, setNewComment] = useState('');
   const [showComments, setShowComments] = useState(false);
 
+  const currentUserId = localStorage.getItem('user_id'); // Assuming user_id is stored in local storage
+
   useEffect(() => {
+    console.log('currentUserId:', currentUserId); // Діагностика
     if (postId && postId !== 'new') {
       fetch(`${baseURL}/posts/${postId}`)
         .then(response => response.json())
         .then(data => {
+          console.log('Post data:', data); // Діагностика
           setPost(data);
           setLikes(data.likes || 0);
           fetchComments(postId);
@@ -42,21 +46,30 @@ const SinglePostPage = () => {
   const handleLike = () => {
     setLikes(likes + 1);
     fetch(`${baseURL}/posts/${postId}/like`, {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+      }
     }).catch(error => console.error('Error liking post:', error));
   };
 
   const handleSave = async (event) => {
     event.preventDefault();
+    const payload = {
+      title: post.title,
+      content: post.content,
+      // Інші поля, які можуть бути необхідні для оновлення
+    };
+    
     if (postId && postId !== 'new') {
       try {
         const response = await fetch(`${baseURL}/posts/${postId}`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json', 
-            ...(localStorage.token ? {authorization:"Bearer "+ localStorage.token} :  {})
+            'Content-Type': 'application/json',
+            ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
           },
-          body: JSON.stringify(post)
+          body: JSON.stringify(payload)
         });
         if (response.ok) {
           setIsEditing(false);
@@ -72,9 +85,9 @@ const SinglePostPage = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...(localStorage.token ? {authorization:"Bearer "+ localStorage.token} :  {})
+            ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
           },
-          body: JSON.stringify(post)
+          body: JSON.stringify(payload)
         });
         if (response.ok) {
           const data = await response.json();
@@ -94,7 +107,7 @@ const SinglePostPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(localStorage.token ? {authorization:"Bearer "+ localStorage.token} :  {})
+          ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
         },
         body: JSON.stringify({ topic: post.title, user_id: post.user.user_id })
       }).then(response => {
@@ -117,9 +130,9 @@ const SinglePostPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(localStorage.token ? {authorization:"Bearer "+ localStorage.token} :  {})
+          ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
         },
-        body: JSON.stringify({ postId, content: newComment })
+        body: JSON.stringify({ post_id: postId, content: newComment })
       });
       if (response.ok) {
         const data = await response.json();
@@ -177,7 +190,9 @@ const SinglePostPage = () => {
               <div className="PostActions">
                 <button className="LikeButton" onClick={handleLike}>Лайки ({likes})</button>
                 <button className="CommentButton" onClick={() => setShowComments(!showComments)}>Коментарі</button>
-                <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
+                {currentUserId === String(post.user.user_id) && (
+                  <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
+                )}
               </div>
               {showComments && (
                 <div className="CommentsContainer">
@@ -192,7 +207,7 @@ const SinglePostPage = () => {
                       />
                     </div>
                     <button type="submit" className="AddCommentButton">
-                      <img src={rightArrowIcon } alt="Додати" className="AddCommentIcon" />
+                      <img src={rightArrowIcon} alt="Додати" className="AddCommentIcon" />
                     </button>
                   </form>
                   <ul className="CommentsList">
