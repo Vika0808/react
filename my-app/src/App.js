@@ -4,6 +4,7 @@ import PostListPage from './post list/PostListPage';
 import SinglePostPage from './single post/SinglePostPage';
 import RegistrationPage from './registration page/RegistrationPage';
 import LoginPage from './registration page/LoginPage';
+import SubscriptionPage from './SubscriptionPage/SubscriptionPage';
 import './styles.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<PostListPage isLoggedIn={isLoggedIn} username={username} />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
+          <Route path="/subscriptions" element={<SubscriptionPage />} />
         </Routes>
       </div>
     </Router>

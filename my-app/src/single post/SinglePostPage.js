@@ -24,9 +24,12 @@ const SinglePostPage = () => {
           setPost(data);
           setLikes(data.likes || 0);
           fetchComments(postId);
-          checkSubscription(data.user.user_id); // Перевірка підписки
+          checkSubscription(data.user.user_id); 
         })
-        .catch(error => console.error('Error fetching post:', error));
+        .catch(error => {
+          console.error('Error fetching post:', error);
+          alert('Failed to fetch post');
+        });
     }
   }, [postId]);
 
@@ -44,7 +47,7 @@ const SinglePostPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+        ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
       },
       body: JSON.stringify({ user_id: userId })
     })
@@ -62,7 +65,7 @@ const SinglePostPage = () => {
     fetch(`${baseURL}/posts/${postId}/like`, {
       method: 'POST',
       headers: {
-        ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+        ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
       }
     }).catch(error => console.error('Error liking post:', error));
   };
@@ -72,7 +75,6 @@ const SinglePostPage = () => {
     const payload = {
       title: post.title,
       content: post.content,
-      // Інші поля, які можуть бути необхідні для оновлення
     };
 
     if (postId && postId !== 'new') {
@@ -81,7 +83,7 @@ const SinglePostPage = () => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+            ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
           },
           body: JSON.stringify(payload)
         });
@@ -99,7 +101,7 @@ const SinglePostPage = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+            ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
           },
           body: JSON.stringify(payload)
         });
@@ -121,7 +123,7 @@ const SinglePostPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+          ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
         },
         body: JSON.stringify({ topic: post.title, user_id: post.user.user_id })
       }).then(response => {
@@ -143,7 +145,7 @@ const SinglePostPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(localStorage.token ? { authorization: "Bearer " + localStorage.token } : {})
+          ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
         },
         body: JSON.stringify({ post_id: postId, content: newComment })
       });
@@ -238,4 +240,3 @@ const SinglePostPage = () => {
 };
 
 export default SinglePostPage;
-

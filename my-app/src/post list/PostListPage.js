@@ -5,12 +5,11 @@ import axios from 'axios';
 import { baseURL } from '../constants';
 import travel from '../travel.jpg';
 
-const PostListPage = () => {
+const PostListPage = ({ isLoggedIn, username }) => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const getUserData = async () => {
@@ -22,7 +21,6 @@ const PostListPage = () => {
         },
       });
       setUser(res.data);
-      setIsLoggedIn(true);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -41,7 +39,6 @@ const PostListPage = () => {
 
   const handleLogout = () => {
     setUser(null);
-    setIsLoggedIn(false);
     localStorage.removeItem('token');
   };
 
@@ -81,6 +78,9 @@ const PostListPage = () => {
               <div className="dropdown">
                 <button className="dropbtn">{user.username}</button>
                 <div className="dropdown-content">
+                  <Link to="/subscriptions">
+                    <button>Підписки</button>
+                  </Link>
                   <button onClick={handleLogout}>Вийти</button>
                 </div>
               </div>
