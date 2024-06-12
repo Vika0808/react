@@ -125,7 +125,7 @@ const SinglePostPage = () => {
           'Content-Type': 'application/json',
           ...(localStorage.token ? { authorization: `Bearer ${localStorage.token}` } : {})
         },
-        body: JSON.stringify({ topic: post.title, user_id: post.user.user_id })
+        body: JSON.stringify({ subscribed_to_user_id: post.user.user_id })
       }).then(response => {
         if (response.ok) {
           setIsSubscribed(true);
