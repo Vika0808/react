@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import { baseURL } from '../constants';
-import travel from '../travel.jpg';
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -51,9 +50,6 @@ const RegistrationPage = () => {
 
   return (
     <>
-      <div className="page-image">
-        <img src={travel} alt="Background" />
-      </div>
     <div className="RegistrationForm" > {}
       <h2>Реєстрація</h2>
       <form onSubmit={handleSubmit}>

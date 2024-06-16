@@ -1,24 +1,99 @@
+html {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  background-image: url('assets/travel.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  flex: 1;
+}
+
 .header {
-    background-color: #f0f0f0;
-    padding: 10px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  color:#2d6a4f;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo h2{
+  color:#2d6a4f;
+  text-transform: none;
+  font-size: 2.2em;
+}
+
+.header-logo > div:first-child{
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 5px 10px;
   }
-  
-  .nav-list {
-    list-style: none;
-    padding: 0;
+
+  .header-logo h2 {
+    display: none;
   }
-  
-  .nav-item {
-    display: inline;
-    margin-left: 20px;
-  }
-  
-  .nav-link {
-    text-decoration: none;
-  }
-  
-  .registration-link {
-    margin-left: 20px;
-    text-decoration: none;
-  }
-  
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline;
+  margin-left: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.registration-link {
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.td-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  color: #28a745;
+}

@@ -36,21 +36,6 @@ body {
   border-radius: 5px;
   box-sizing: border-box;
 }
-.page-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Ensure the image is behind the content */
-  overflow: hidden;
-}
-
-.page-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensure the image covers the entire div */
-}
 
 .RegistrationForm button {
   width: calc(100% - 20px);

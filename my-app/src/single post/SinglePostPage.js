@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import './singlePostPage.css';
 import { baseURL } from '../constants';
 import rightArrowIcon from './right-arrow.png';
-import travel from '../travel.jpg';
 
-const SinglePostPage = () => {
+const SinglePostPage = ({isLoggedIn, username}) => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState({ title: '', content: '', user: {} });
@@ -87,12 +90,14 @@ const SinglePostPage = () => {
           },
           body: JSON.stringify(payload)
         });
-        if (response.ok) {
+        if (response.status === 200) {
           setIsEditing(false);
+          toast.success('Пост успішно збережено.');
         } else {
-          alert('Failed to update post.');
+          toast.error('Похибка при збереженні посту.');
         }
       } catch (error) {
+        toast.error('Похибка при збереженні посту.');
         console.error('Error updating post:', error);
       }
     } else {
@@ -105,13 +110,16 @@ const SinglePostPage = () => {
           },
           body: JSON.stringify(payload)
         });
+        console.log(response);
         if (response.ok) {
-          const data = await response.json();
-          navigate(`/posts/${data.post_id}`);
+          toast.success('Пост успішно збережено.');
+          setIsEditing(false);
+          navigate(`/`);
         } else {
-          alert('Failed to create post.');
+          toast.error('Похибка при збереженні посту.');
         }
       } catch (error) {
+        toast.error('Похибка при збереженні посту.');
         console.error('Error creating post:', error);
       }
     }
@@ -119,6 +127,8 @@ const SinglePostPage = () => {
 
   const handleSubscribe = () => {
     if (!isSubscribed) {
+      console.log(localStorage.token);
+      console.log(post.user.user_id);
       fetch(`${baseURL}/subscriptions`, {
         method: 'POST',
         headers: {
@@ -163,9 +173,6 @@ const SinglePostPage = () => {
 
   return (
     <>
-      <div className="page-image">
-        <img src={travel} alt="Background" />
-      </div>
       <div className="CentralContainer">
         <div className="SinglePost">
           {isEditing ? (
@@ -188,14 +195,21 @@ const SinglePostPage = () => {
                 />
               </div>
               <button type="submit">Зберегти</button>
+              <Link to="#" onClick={(e) => { setIsEditing(false); e.preventDefault(); }}>Скасувати</Link>
             </form>
           ) : (
             <>
-              <div className="PostUser">
-                <span>Автор: {post.user.username}</span>
-                <button className="SubscribeButton" onClick={handleSubscribe}>
-                  {isSubscribed ? 'Ви підписані' : 'Підписатись'}
-                </button>
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div className="PostUser">
+                  <span>Автор: {post.user.username}</span>
+                  {
+                    isLoggedIn && post.user.username !== username &&
+                    <button className="SubscribeButton" onClick={handleSubscribe}>
+                      {isSubscribed ? 'Ви підписані' : 'Підписатись'}
+                    </button>
+                  }
+                </div>
+                <Link to="/">До списку постів</Link>
               </div>
               <h2 className="PostTitle">{post.title}</h2>
               <hr className="Divider" />
@@ -204,9 +218,17 @@ const SinglePostPage = () => {
               </div>
               <hr className="Divider" />
               <div className="PostActions">
-                <button className="LikeButton" onClick={handleLike}>Лайки ({likes})</button>
-                <button className="CommentButton" onClick={() => setShowComments(!showComments)}>Коментарі</button>
-                <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
+                {
+                  isLoggedIn &&
+                  <>
+                    <button className="LikeButton" onClick={handleLike}>Лайки ({likes})</button>
+                    <button className="CommentButton" onClick={() => setShowComments(!showComments)}>Коментарі</button>
+                  </>
+                }
+                {
+                  isLoggedIn && post.user.username === username &&
+                  <button className="EditButton" onClick={() => setIsEditing(true)}>Редагувати</button>
+                }
               </div>
               {showComments && (
                 <div className="CommentsContainer">
@@ -235,6 +257,7 @@ const SinglePostPage = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './subscriptionPage.css';
 import axios from 'axios';
 import { baseURL } from '../constants';
-import travel from '../travel.jpg';
 
 const SubscriptionListPage = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -41,9 +40,6 @@ const SubscriptionListPage = () => {
 
   return (
     <>
-      <div className="page-image">
-        <img src={travel} alt="Background" />
-      </div>
       <div className="page-container">
         <header className="header">
           <h1>Підписки</h1>

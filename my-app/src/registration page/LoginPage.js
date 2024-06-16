@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './loginPage.css'; 
 import { baseURL } from '../constants';
-import travel from '../travel.jpg';
+import { Link } from 'react-router-dom';
 
 
 const LoginPage = () => {
@@ -49,6 +49,7 @@ const LoginPage = () => {
       const result = await response.json();
       console.log(result);
       localStorage.setItem('token', result.access_token);
+      localStorage.setItem('username', formData.username);
       window.location.href = '/';
     } catch (error) {
       setError(error.message);
@@ -57,10 +58,7 @@ const LoginPage = () => {
 
   return (
     <>
-    <div className="page-image">
-      <img src={travel} alt="Background" />
-    </div>
-    <div className="LoginForm">
+    <div className="login-form">
       <h2>Вхід</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -89,18 +87,24 @@ const LoginPage = () => {
           </label>
         </div>
         <div>
-          <label>
-            Запам'ятати мене:
+          <div style={{display:'flex'}}>
+            <label htmlFor='rememberMe'>
+              Запам'ятати мене:
+            </label>
             <input
-              type="checkbox"
-              name="rememberMe"
-              checked={formData.rememberMe}
-              onChange={handleChange}
-              className="RememberMeCheckbox"
-            />
-          </label>
+              id="rememberMe"
+                type="checkbox"
+                name="rememberMe"
+                checked={formData.rememberMe}
+                onChange={handleChange}
+                className="RememberMeCheckbox"
+              />
+          </div>
         </div>
         <button type="submit" className="FormButton">Увійти</button>
+        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+          <Link to="/registration">Досі не зареєстровані?</Link>
+        </div>
       </form>
     </div>
     </>

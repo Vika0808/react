@@ -3,32 +3,17 @@ import { Link } from 'react-router-dom';
 import './postListStyles.css';
 import axios from 'axios';
 import { baseURL } from '../constants';
-import travel from '../travel.jpg';
 
-const PostListPage = ({ isLoggedIn, username }) => {
-  const [user, setUser] = useState(null);
+const PostListPage = ({isLoggedIn}) => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const getUserData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const res = await axios.get(`${baseURL}/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(res.data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
   const getPosts = async () => {
     try {
       const res = await axios.get(`${baseURL}/posts`);
+      console.log(res.data);
       setPosts(res.data);
       setFilteredPosts(res.data);
     } catch (error) {
@@ -36,11 +21,7 @@ const PostListPage = ({ isLoggedIn, username }) => {
       setError('Failed to fetch posts');
     }
   };
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('token');
-  };
+  
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -61,60 +42,43 @@ const PostListPage = ({ isLoggedIn, username }) => {
   };
 
   useEffect(() => {
-    getUserData();
     getPosts();
   }, []);
 
   return (
     <>
-      <div className="page-image">
-        <img src={travel} alt="Background" />
-      </div>
-      <div className="page-container">
-        <header className="header">
-          <h1>Щоденник мандрівника</h1>
-          <div className="user-info">
-            {user ? (
-              <div className="dropdown">
-                <button className="dropbtn">{user.username}</button>
-                <div className="dropdown-content">
-                  <Link to="/subscriptions">
-                    <button>Підписки</button>
-                  </Link>
-                  <button onClick={handleLogout}>Вийти</button>
-                </div>
-              </div>
-            ) : (
-              <Link to="/registration">
-                <button className="registration-button">Реєстрація/Вхід</button>
-              </Link>
-            )}
-            {isLoggedIn && (
-              <Link to="/posts/new">
+      { 
+        isLoggedIn && 
+            <Link to="/posts/new">
                 <button className="add-post-button">+</button>
-              </Link>
-            )}
-          </div>
-        </header>
+            </Link>
+      }
+      <div className="page-container">
         <div className="post-list-container">
           <div className="filter-container">
-            <input
-              type="text"
-              placeholder="Пошук..."
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-            <select onChange={(e) => handleSort(e.target.value)}>
-              <option value="alphabetic">Сортувати за алфавітом</option>
-              <option value="likes">Сортувати за лайками</option>
-            </select>
+            <div>
+              <input
+                type="text"
+                placeholder="Пошук..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </div>
+            <div>
+              <select onChange={(e) => handleSort(e.target.value)}>
+                <option value="alphabetic">Сортувати за алфавітом</option>
+                <option value="likes">Сортувати за лайками</option>
+              </select>
+            </div>
           </div>
           {error && <p className="error-message">{error}</p>}
           <div className="post-list">
             {filteredPosts && Array.isArray(filteredPosts) && filteredPosts.map(post => (
-              <div key={post.id} id={post.id} className="post-item">
+              <div key={post.post_id} id={post.post_id} className="post-item">
+                <div>
                 <h3 className="post-title">{post.title}</h3>
-                {post.text && <p className="post-text">{post.text}</p>}
+                </div>
+                {<p className="post-text">{post.content}</p>}
                 {post.comments && post.comments.length > 0 && (
                   <ul className="comment-list">
                     {post.comments.map(comment => (
