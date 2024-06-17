@@ -29,7 +29,7 @@ const SubscriptionListPage = () => {
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     const filtered = subscriptions.filter(sub =>
-      sub.title.toLowerCase().includes(e.target.value.toLowerCase())
+      sub.subscribedToUser && sub.subscribedToUser.username.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredSubscriptions(filtered);
   };
@@ -39,40 +39,34 @@ const SubscriptionListPage = () => {
   }, []);
 
   return (
-    <>
-      <div className="page-container">
-        <header className="header">
-          <h1>Підписки</h1>
-          <Link to="/" className="back-button">
-            Назад до постів
-          </Link>
-        </header>
-        <div className="subscription-list-container">
-          <div className="filter-container">
-            <input
-              type="text"
-              placeholder="Пошук..."
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <div className="subscription-list">
-            {filteredSubscriptions && Array.isArray(filteredSubscriptions) && filteredSubscriptions.map(sub => (
-              <div key={sub.id} id={sub.id} className="subscription-item">
-                <h3 className="subscription-title">{sub.title}</h3>
-                {sub.content && <p className="subscription-content">{sub.content}</p>}
+    <div className="page-container">
+      <div className="subscription-list-container">
+        <div className="filter-container">
+          <input
+            type="text"
+            placeholder="Пошук..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </div>
+        {error && <p className="error-message">{error}</p>}
+        <div className="subscription-list">
+          {filteredSubscriptions && Array.isArray(filteredSubscriptions) && filteredSubscriptions.map(sub => (
+            sub.subscribedToUser && (
+              <div key={sub.subscription_id} className="subscription-item">
+                <h3 className="subscription-title">{sub.subscribedToUser.username}</h3>
+                {sub.subscribedToUser.bio && <p className="subscription-content">{sub.subscribedToUser.bio}</p>}
                 <div className="detail-button-box">
-                  <Link to={`/subscriptions/${sub.id}`}>
-                    <button className="detail-button">Детальніше</button>
+                  <Link to={`/users/${sub.subscribedToUser.user_id}`}>
+                    <button className="detail-button">Переглянути профіль</button>
                   </Link>
                 </div>
               </div>
-            ))}
-          </div>
+            )
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -5,7 +5,13 @@ import LogoTd from './Logo';
 const TdHeader = ({isLoggedIn, userName, onLogOut}) => {
     console.log('userName:', userName);
     console.log('isLoggedIn:', isLoggedIn);
-      return (
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        onLogOut && onLogOut();
+    };
+
+    return (
         <header className="header">
             <Link to="/">
                 <div className="header-logo">
@@ -15,30 +21,25 @@ const TdHeader = ({isLoggedIn, userName, onLogOut}) => {
                     </div>
                 </div>
             </Link>
-          <div className="user-info">
-            { 
-                isLoggedIn 
-                    ? <div className="dropdown">
-                        <button className="dropbtn">{userName ?? ''}</button>
-                        <div className="dropdown-content">
-                        <Link to="/subscriptions">
-                            <button>Підписки</button>
-                        </Link>
-                        <button onClick={handleLogout}>Вийти</button>
+            <div className="user-info">
+                { 
+                    isLoggedIn 
+                        ? <div className="dropdown">
+                            <button className="dropbtn">{userName ?? ''}</button>
+                            <div className="dropdown-content">
+                                <Link to="/subscriptions">
+                                    <button>Підписки</button>
+                                </Link>
+                                <button onClick={handleLogout}>Вийти</button>
+                            </div>
                         </div>
-                    </div>
-                    : <Link to="/login">
-                        Реєстрація / Вхід
-                    </Link>
-            }
-          </div>
+                        : <Link to="/login">
+                            Реєстрація / Вхід
+                        </Link>
+                }
+            </div>
         </header>
     );
-
-    function handleLogout() {
-        localStorage.removeItem('token');
-        onLogOut && onLogOut();
-    }
 };
 
 export default TdHeader;
