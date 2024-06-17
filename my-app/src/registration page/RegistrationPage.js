@@ -10,6 +10,7 @@ const RegistrationPage = () => {
     password: '',
     confirmPassword: '',
     dateOfBirth: '',
+    role: 'user', // Додаємо поле для ролі
     rememberMe: false
   });
 
@@ -24,33 +25,33 @@ const RegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {confirmPassword, ...values} = formData
-    
+    const { confirmPassword, ...values } = formData;
+
     console.log(formData);
-    const result = await fetch(`${baseURL}/auth/register`,
-    {
+    const result = await fetch(`${baseURL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(values)
-    }
-  
-    )
-    const data = await result.json()
+    });
+
+    const data = await result.json();
     console.log(data);
 
     setFormData({
       username: '',
       email: '',
       password: '',
-      date: '',
+      confirmPassword: '',
+      dateOfBirth: '',
+      role: 'user',
+      rememberMe: false,
     });
   };
 
   return (
-    <>
-    <div className="RegistrationForm" > {}
+    <div className="RegistrationForm">
       <h2>Реєстрація</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -115,6 +116,20 @@ const RegistrationPage = () => {
         </div>
         <div>
           <label>
+            Роль:
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="FormField"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
             Запам'ятати мене:
             <input
               type="checkbox"
@@ -129,7 +144,6 @@ const RegistrationPage = () => {
       </form>
       <p>Вже зареєстровані? <Link to="/login">Увійти</Link></p>
     </div>
-    </>
   );
 };
 
