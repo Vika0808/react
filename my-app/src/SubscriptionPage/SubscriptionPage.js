@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import './subscriptionPage.css';
 import axios from 'axios';
 import { baseURL } from '../constants';
-import { jwtDecode } from "jwt-decode";
-
+import { jwtDecode } from 'jwt-decode';
 
 const SubscriptionListPage = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -16,18 +15,15 @@ const SubscriptionListPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decoded = jwtDecode(token);
-    console.log(token)
-    console.log(decoded)
-      if (decoded.role === 'admin') {
-        setIsAdmin(true);
-        getUsers();
-      } else {
-        getSubscriptions();
-      }
-    
+    console.log(token);
+    console.log(decoded);
+    if (decoded.role === 'admin') {
+      setIsAdmin(true);
+      getUsers();
+    } else {
+      getSubscriptions();
+    }
   }, []);
-
-  
 
   const getUsers = async () => {
     try {

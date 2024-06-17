@@ -4,7 +4,7 @@ import './postListStyles.css';
 import axios from 'axios';
 import { baseURL } from '../constants';
 
-const PostListPage = ({isLoggedIn}) => {
+const PostListPage = ({ isLoggedIn }) => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [error, setError] = useState(null);
@@ -13,7 +13,6 @@ const PostListPage = ({isLoggedIn}) => {
   const getPosts = async () => {
     try {
       const res = await axios.get(`${baseURL}/posts`);
-      console.log(res.data);
       setPosts(res.data);
       setFilteredPosts(res.data);
     } catch (error) {
@@ -21,7 +20,6 @@ const PostListPage = ({isLoggedIn}) => {
       setError('Failed to fetch posts');
     }
   };
-  
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -47,12 +45,11 @@ const PostListPage = ({isLoggedIn}) => {
 
   return (
     <>
-      { 
-        isLoggedIn && 
-            <Link to="/posts/new">
-                <button className="add-post-button">+</button>
-            </Link>
-      }
+      {isLoggedIn && (
+        <Link to="/posts/new">
+          <button className="add-post-button">+</button>
+        </Link>
+      )}
       <div className="page-container">
         <div className="post-list-container">
           <div className="filter-container">
@@ -73,26 +70,29 @@ const PostListPage = ({isLoggedIn}) => {
           </div>
           {error && <p className="error-message">{error}</p>}
           <div className="post-list">
-            {filteredPosts && Array.isArray(filteredPosts) && filteredPosts.map(post => (
-              <div key={post.post_id} id={post.post_id} className="post-item">
-                <div>
-                <h3 className="post-title">{post.title}</h3>
+            {filteredPosts &&
+              Array.isArray(filteredPosts) &&
+              filteredPosts.map(post => (
+                <div key={post.post_id} id={post.post_id} className="post-item">
+                  <div>
+                    <h3 className="post-title">{post.title}</h3>
+                  </div>
+                  {/* Limiting content to 100 characters */}
+                  <p className="post-text">{post.content.length > 100 ? `${post.content.substring(0, 100)}...` : post.content}</p>
+                  {post.comments && post.comments.length > 0 && (
+                    <ul className="comment-list">
+                      {post.comments.map(comment => (
+                        <li key={comment.commentId} className="comment-item">{comment.commentText}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <div className="detail-button-box">
+                    <Link to={`/posts/${post.post_id}`}>
+                      <button className="detail-button">Детальніше</button>
+                    </Link>
+                  </div>
                 </div>
-                {<p className="post-text">{post.content}</p>}
-                {post.comments && post.comments.length > 0 && (
-                  <ul className="comment-list">
-                    {post.comments.map(comment => (
-                      <li key={comment.commentId} className="comment-item">{comment.commentText}</li>
-                    ))}
-                  </ul>
-                )}
-                <div className="detail-button-box">
-                  <Link to={`/posts/${post.post_id}`}>
-                    <button className="detail-button">Детальніше</button>
-                  </Link>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
